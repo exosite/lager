@@ -286,7 +286,7 @@ log_event(Event, #state{sink=Sink} = State) ->
                         _ ->
                             MFA = format_mfa(get_value(mfargs, Started)),
                             Pid = get_value(pid, Started),
-                            ?LOGFMT(Sink, debug, P, "Supervisor ~w started ~s at pid ~w",
+                            ?LOGFMT(Sink, info, P, "Supervisor ~w started ~s at pid ~w",
                                 [supervisor_name(Name), MFA, Pid])
                     end;
                 _ ->
