@@ -423,7 +423,7 @@ format_reason_md({system_limit, [{M, F, _}|_] = Trace}) ->
         {ets, new} ->
             "maximum number of ETS tables exceeded";
         _ ->
-            {Str, _} = lager_trunc_io:print(Trace, 500),
+            {Str, _} = lager_trunc_io:print(Trace, ?DEFAULT_TRUNCATION),
             Str
     end,
     {[{reason, system_limit}], ["system limit: ", Limit]};
@@ -472,7 +472,7 @@ format_reason_md({Reason, [{M, F, A, Props}|_]}) when is_atom(M), is_atom(F), is
     {_, Formatted2} = format_mfa_md({M, F, A, Props}),
     {Md, [Formatted, " in ", Formatted2]};
 format_reason_md(Reason) ->
-    {Str, _} = lager_trunc_io:print(Reason, 500),
+    {Str, _} = lager_trunc_io:print(Reason, ?DEFAULT_TRUNCATION),
     {[], Str}.
 
 %% backwards compatability shim
@@ -505,7 +505,7 @@ format_mfa_md(Other) ->
 format_args([], FmtAcc, ArgsAcc) ->
     {string:join(lists:reverse(FmtAcc), ", "), lists:reverse(ArgsAcc)};
 format_args([H|T], FmtAcc, ArgsAcc) ->
-    {Str, _} = lager_trunc_io:print(H, 100),
+    {Str, _} = lager_trunc_io:print(H, ?DEFAULT_TRUNCATION),
     format_args(T, ["~s"|FmtAcc], [Str|ArgsAcc]).
 
 print_silly_list(L) when is_list(L) ->
@@ -528,7 +528,7 @@ print_silly_list([H|T], Fmt, Acc) ->
     print_silly_list(T, ["~p" | Fmt], [H | Acc]).
 
 print_val(Val) ->
-    {Str, _} = lager_trunc_io:print(Val, 500),
+    {Str, _} = lager_trunc_io:print(Val, ?DEFAULT_TRUNCATION),
     Str.
 
 

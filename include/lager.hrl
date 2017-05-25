@@ -15,7 +15,7 @@
 %% under the License.
 
 
--define(DEFAULT_TRUNCATION, 4096).
+-define(DEFAULT_TRUNCATION, 1048576). % 1 MB.
 -define(DEFAULT_TRACER, lager_default_tracer).
 -define(DEFAULT_SINK, lager_event).
 -define(ERROR_LOGGER_SINK, error_logger_lager_event).
